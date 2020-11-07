@@ -6,7 +6,6 @@ from sklearn import metrics #Import scikit-learn metrics module for accuracy cal
 
 def main():
     #df[nombreColumna][NúmeroFila] da el valor
-    #Ulyses
     #print(df['Desc_curso'][0])
     print('Elige una opción:')
     print('1.Árbol de decisión 2.Bayes 3. Ver primeros datos')
@@ -48,7 +47,6 @@ def obtenerArbolDec(dataSet):
     #Predicción para el dataset test
     y_pred = clf.predict(X_test)
     # Midiendo exactitud del modelo
-    # Comentario
     print("Exactitud:",metrics.accuracy_score(Y_test, y_pred))
     print('-----Fin arbol de decisión------')
 
