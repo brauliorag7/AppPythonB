@@ -15,7 +15,7 @@ def main():
     #Carga el archivo excel a un DataFrame
     #uevo Comentario
     print('Leyendo excel...')
-    df = pd.read_excel('data.xlsx', sheet_name='Sheet1')
+    df=tool.procesoEditarDataSet('data_v2.xlsx')
     if op==1:
         tool.obtenerArbolDec(df)
     if op==2:

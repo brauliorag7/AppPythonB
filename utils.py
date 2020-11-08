@@ -1,4 +1,5 @@
 import pandas as pd
+import openpyxl
 from sklearn.tree import DecisionTreeClassifier # Import Decision Tree Classifier
 from sklearn.model_selection import train_test_split # Import train_test_split function
 from sklearn import metrics #Import scikit-learn metrics module for accuracy calculation
@@ -37,5 +38,23 @@ def verPrimerosDatos(dataSet):
 
 #url to replace values in dataframe: https://datatofish.com/replace-values-pandas-dataframe/
 #Nota: Poner las columnas que se deseen editar igual que en la hoja.
-def procesoEditarDataSet(dataSet):
-    print('Editando dataset...')    
+def procesoEditarDataSet(archivo):
+    print('Editando dataset...') 
+    #Obtener todas las hojas del archivo
+    book = openpyxl.load_workbook(archivo)
+    lsAllSheets=[]
+    lsAllSheets=book.sheetnames
+    lsAllSheets.remove('Sheet1')
+    book.close()
+    #Obtener el dataFrame principal (Sheet1)
+    df_main = pd.read_excel(archivo, sheet_name='Sheet1') 
+    #Obtener un dataDrame temporal por cada Hoja del archivo excel
+    for colName in df_main.columns:
+        if colName in lsAllSheets:
+            df_temp=pd.read_excel(archivo,sheet_name=colName)
+            #Obtener valores current y new 
+            lsCurrent=df_temp['current'].values.tolist()
+            lsNew=df_temp['new'].values.tolist()
+            df_main[colName] = df_main[colName].replace(lsCurrent,lsNew)
+           
+    return df_main 
