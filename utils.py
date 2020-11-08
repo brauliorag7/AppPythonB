@@ -36,5 +36,6 @@ def verPrimerosDatos(dataSet):
     print(dataSet.head()) 
 
 #url to replace values in dataframe: https://datatofish.com/replace-values-pandas-dataframe/
+#Nota: Poner las columnas que se deseen editar igual que en la hoja.
 def procesoEditarDataSet(dataSet):
     print('Editando dataset...')    
