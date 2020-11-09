@@ -9,9 +9,9 @@ def obtenerArbolDec(dataSet):
     #Paso 1. Obtener variables dependientes e independientes (X:Independiente, Y:Dependiente)
     #En Python, como nomenclatura, "Feature columns"="Independent (X)", "Target Columns"="Dependent(Y)"
     print('Establenciendo variables independientes (X) y dependientes (Y)...')
-    col_indep = ['Desc_curso', 'Facultad']
+    col_indep = ['Desc_curso', 'Facultad', 'Modaliad']
     X = dataSet[col_indep] 
-    col_dep = ['NOTA_CURSO<12_(groups)']
+    col_dep = ['NOTA_CURSO<12']
     Y = dataSet[col_dep]
     #Paso 2: Dividir el dataset original en training set y test set
     print('Obteniendo set de Entrenamiento y pruebas...')
