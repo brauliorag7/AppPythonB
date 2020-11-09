@@ -14,14 +14,19 @@ def main():
     op=int(op)
     #Carga el archivo excel a un DataFrame
     #uevo Comentario
+    tool.imprimirHora()
+    tool.imprimirEstadistica()
     print('Leyendo excel...')
     df=tool.procesoEditarDataSet('data_v2.xlsx')
     if op==1:
         tool.obtenerArbolDec(df)
+        tool.imprimirHora()
     if op==2:
         tool.obtenerBayes(df)
+        tool.imprimirHora()
     if op==3:
-        tool.verPrimerosDatos(df)    
+        tool.verPrimerosDatos(df) 
+        tool.imprimirHora()   
 
        
     
