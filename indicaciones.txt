@@ -7,3 +7,8 @@
 
 2)Obener métricas de ambos 
 3)Instalar Python 3.8.5
+
+Pendiente:
+-Agregar tiempo, memoria y procesador utilizaos desde python
+-gráficas de árbol de decisión
+-Poner valores en blanco con cero en todo el data set.
