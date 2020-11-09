@@ -9,7 +9,7 @@ def obtenerArbolDec(dataSet):
     #Paso 1. Obtener variables dependientes e independientes (X:Independiente, Y:Dependiente)
     #En Python, como nomenclatura, "Feature columns"="Independent (X)", "Target Columns"="Dependent(Y)"
     print('Establenciendo variables independientes (X) y dependientes (Y)...')
-    col_indep = ['Desc_curso', 'Facultad', 'Modaliad']
+    col_indep = ['Desc_curso', 'Facultad','Modalidad']
     X = dataSet[col_indep] 
     col_dep = ['NOTA_CURSO<12']
     Y = dataSet[col_dep]
