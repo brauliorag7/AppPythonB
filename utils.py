@@ -3,6 +3,10 @@ import openpyxl
 from sklearn.tree import DecisionTreeClassifier # Import Decision Tree Classifier
 from sklearn.model_selection import train_test_split # Import train_test_split function
 from sklearn import metrics #Import scikit-learn metrics module for accuracy calculation
+from sklearn.tree import export_graphviz
+from six import StringIO  
+from IPython.display import Image  
+import pydotplus
 from datetime import datetime
 import psutil
 
@@ -31,6 +35,7 @@ def obtenerArbolDec(dataSet):
     y_pred = clf.predict(X_test)
     # Midiendo exactitud del modelo
     print("Exactitud:",metrics.accuracy_score(Y_test, y_pred))
+    chartDecTree1(clf,col_indep)
     print('-----Fin arbol de decisión------')
 
 def obtenerBayes(dataSet):
@@ -74,5 +79,15 @@ def imprimirHora():
 def imprimirEstadistica():
     print('Ram usada:',str(psutil.virtual_memory().percent),'%')
     print('CPU usada:',str(psutil.cpu_percent()),'%')
+
+def chartDecTree1(clf,feature_cols):
+    print('Generando gráfica')
+    dot_data = StringIO()
+    export_graphviz(clf, out_file=dot_data,  filled=True, rounded=True,special_characters=True,feature_names = feature_cols)
+    graph = pydotplus.graph_from_dot_data(dot_data.getvalue())  
+    graph.write_png('chart1.png')
+    Image(graph.create_png())
+
+
 
 
