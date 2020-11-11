@@ -9,6 +9,7 @@ from IPython.display import Image
 import pydotplus
 from datetime import datetime
 import psutil
+ 
 
 def obtenerArbolDec(dataSet):
     print('Elaborando árbol de decisión...')
@@ -35,7 +36,7 @@ def obtenerArbolDec(dataSet):
     y_pred = clf.predict(X_test)
     # Midiendo exactitud del modelo
     print("Exactitud:",metrics.accuracy_score(Y_test, y_pred))
-    chartDecTree1(clf,col_indep)
+    chartDecTree1(clf,col_indep,col_dep)
     print('-----Fin arbol de decisión------')
 
 def obtenerBayes(dataSet):
@@ -80,13 +81,12 @@ def imprimirEstadistica():
     print('Ram usada:',str(psutil.virtual_memory().percent),'%')
     print('CPU usada:',str(psutil.cpu_percent()),'%')
 
-def chartDecTree1(clf,feature_cols):
-    print('Generando gráfica')
-    dot_data = StringIO()
-    export_graphviz(clf, out_file=dot_data,  filled=True, rounded=True,special_characters=True,feature_names = feature_cols)
-    graph = pydotplus.graph_from_dot_data(dot_data.getvalue())  
-    graph.write_png('chart1.png')
-    Image(graph.create_png())
+def chartDecTree1(clf,feature_cols,target_cols):
+    print('Generando gráfica')   
+    dot_data=export_graphviz(clf, out_file=None,feature_names = feature_cols)
+    graph = pydotplus.graph_from_dot_data(dot_data) 
+    Image(graph.create_png()) #Error aqui GraphViz's executables not found
+
 
 
 
