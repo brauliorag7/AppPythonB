@@ -12,3 +12,6 @@ Pendiente:
 
 -gráficas de árbol de decisión
 
+Sitio oficial: https://graphviz.org/download/
+Instalar graphviz : https://graphviz.gitlab.io/_pages/Download/windows/graphviz-2.38.msi
+
