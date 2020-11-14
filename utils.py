@@ -11,8 +11,11 @@ from datetime import datetime
 import psutil
  
 
-def obtenerArbolDec(dataSet):
-    print('Elaborando árbol de decisión...')
+def obtenerArbolDec(dataSet,op):
+    if op==1:
+       print('Elaborando árbol de decisión con entropía...')
+    else:
+        print('Elaborando árbol de decisión...')
     #Paso 1. Obtener variables dependientes e independientes (X:Independiente, Y:Dependiente)
     #En Python, como nomenclatura, "Feature columns"="Independent (X)", "Target Columns"="Dependent(Y)"
     print('Establenciendo variables independientes (X) y dependientes (Y)...')
@@ -27,7 +30,11 @@ def obtenerArbolDec(dataSet):
     imprimirEstadistica()
     print('Iniciando Proceso de árbol de decisión...')
     #Paso 4: Iniciallizar árbol de deicisón
-    clf = DecisionTreeClassifier()
+    if op==1:
+        clf = DecisionTreeClassifier(criterion="entropy", max_depth=3)
+    else:
+        clf = DecisionTreeClassifier()
+
     print('Entrenando modelo...')
     imprimirEstadistica()
     #Paso 5: Entrenar modelo
@@ -36,7 +43,8 @@ def obtenerArbolDec(dataSet):
     y_pred = clf.predict(X_test)
     # Midiendo exactitud del modelo
     print("Exactitud:",metrics.accuracy_score(Y_test, y_pred))
-    chartDecTree1(clf,col_indep,col_dep)
+    #Gráfica
+    chartDecTree1(clf,col_indep)
     print('-----Fin arbol de decisión------')
 
 def obtenerBayes(dataSet):
@@ -81,10 +89,14 @@ def imprimirEstadistica():
     print('Ram usada:',str(psutil.virtual_memory().percent),'%')
     print('CPU usada:',str(psutil.cpu_percent()),'%')
 
-def chartDecTree1(clf,feature_cols,target_cols):
+def chartDecTree1(clf,feature_cols):
     print('Generando gráfica')   
     dot_data = StringIO()
-    export_graphviz(clf, out_file=dot_data,  filled=True, rounded=True,special_characters=True, feature_names = feature_cols)
+    #Procedimiento para convertir los valores a string en class_names
+    lsTemp=[]
+    for c in clf.classes_:
+        lsTemp.append(str(c))
+    export_graphviz(clf, out_file=dot_data,  filled=True, rounded=True,special_characters=True, feature_names = feature_cols,class_names=lsTemp)
     graph = pydotplus.graph_from_dot_data(dot_data.getvalue())  
     graph.write_png('clf.png')
     Image(graph.create_png())

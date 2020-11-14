@@ -19,7 +19,10 @@ def main():
     print('Leyendo excel...')
     df=tool.procesoEditarDataSet('data_v2.xlsx')
     if op==1:
-        tool.obtenerArbolDec(df)
+        print('1.Entropía , 2. Sin entropía')
+        op=input()
+        op=int(op)
+        tool.obtenerArbolDec(df,op)
         tool.imprimirHora()
     if op==2:
         tool.obtenerBayes(df)
