@@ -9,6 +9,8 @@ from IPython.display import Image
 import pydotplus
 from datetime import datetime
 import psutil
+import time
+
  
 
 def obtenerArbolDec(dataSet,op):
@@ -100,6 +102,9 @@ def chartDecTree1(clf,feature_cols):
     graph = pydotplus.graph_from_dot_data(dot_data.getvalue())  
     graph.write_png('clf.png')
     Image(graph.create_png())
+
+def obtenerTiempoSegundos():
+    return time.perf_counter()   
 
 
 
